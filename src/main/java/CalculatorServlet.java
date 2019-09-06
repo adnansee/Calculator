@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet("")
@@ -13,6 +15,7 @@ public class CalculatorServlet extends HttpServlet {
     private final String RESULT = "CalculatorServlet.result";
     private final String NUMBER = "number";
     private String previousResult = "previous_results";
+    private List<String> lstAnswers = new ArrayList<>();
 
 
     @Override
@@ -54,7 +57,7 @@ public class CalculatorServlet extends HttpServlet {
             out.println("<input type='submit' name= 'operation' value= 'Subtract' />");
             out.println("<input type='submit' name= 'operation' value= 'Multiply' />");
             out.println("<input type='submit' name= 'operation' value= 'Divide' />");
-            out.println("<p>"+ previousResult +"</p>");
+            out.println("<p>"+ lstAnswers +"</p></b>");
 
             out.println("</form></body></html>");
         }
@@ -75,25 +78,45 @@ public class CalculatorServlet extends HttpServlet {
 
         String numberPärameter = req.getParameter(NUMBER);
         String previous_results = "RESULT IS "+numberPärameter;
+        int lastNum1 = 0;
+        int lastNum2 = 0;
         if (numberPärameter != null) {
             try {
                 String type = req.getParameter("operation");
+
                 System.out.println(type);
 
                 switch (type) {
                     case "Add":
+                         lastNum1 = Integer.parseInt(numberPärameter);
+                         lastNum2 = result;
                         result += Integer.parseInt(numberPärameter);
-
-
+                        previousResult = String.valueOf(lastNum2)+ " +   " +   String.valueOf(lastNum1) + "= " + result + "\n";
+                        lstAnswers.add(previousResult);
                         break;
                     case "Subtract":
+
+                       lastNum1 = Integer.parseInt(numberPärameter);
+                        lastNum2 = result;
                         result -= Integer.parseInt(numberPärameter);
+                        previousResult = String.valueOf(lastNum2) + " - " + String.valueOf(lastNum1) +" = "+ result+"\n";
+                        lstAnswers.add(previousResult);
                         break;
                     case "Multiply":
+
+                        lastNum1 = Integer.parseInt(numberPärameter);
+                        lastNum2 = result;
                         result *= Integer.parseInt(numberPärameter);
+                        previousResult = String.valueOf(lastNum2) + " x " + String.valueOf(lastNum1) +" = "+ result+"\n";
+                        lstAnswers.add(previousResult);
                         break;
                     case "Divide":
+
+                        lastNum1 = Integer.parseInt(numberPärameter);
+                        lastNum2 = result;
                         result /= Integer.parseInt(numberPärameter);
+                        previousResult = String.valueOf(lastNum2) + " / " + String.valueOf(lastNum1) +" = "+ result+"\n";
+                        lstAnswers.add(previousResult);
                         break;
                 }
 
