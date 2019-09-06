@@ -40,27 +40,7 @@ public class CalculatorServlet extends HttpServlet {
         if (resultAttribute != null) {
             message = (String) messageAttribute;
         }
-
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = resp.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html><head><title>Calculator");
-            out.println("</title></head><body>");
-            out.println("<form method='POST'>");
-            out.println(message + "<br/>");
-            out.println("Result: " + result + "<br/>");
-            out.println("<input type = 'number' name ='number' />");
-            out.println("<input type='submit' name= 'operation' value= 'Add' />");
-            out.println("<input type='submit' name= 'operation' value= 'Subtract' />");
-            out.println("<input type='submit' name= 'operation' value= 'Multiply' />");
-            out.println("<input type='submit' name= 'operation' value= 'Divide' />");
-            out.println("<br><p>"+ lstAnswers +"</p>");
-
-            out.println("</form></body></html>");
-        }
-        super.doGet(req, resp);
-    }
+            }
 
 
     @Override
