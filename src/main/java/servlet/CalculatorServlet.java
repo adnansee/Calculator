@@ -1,3 +1,5 @@
+package servlet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @WebServlet("")
 public class CalculatorServlet extends HttpServlet {
-    private final String RESULT = "CalculatorServlet.result";
+    private final String RESULT = "servlet.CalculatorServlet.result";
     private final String NUMBER = "number";
     private String previousResult = "previous_results";
     private List<String> lstAnswers = new ArrayList<>();
@@ -39,10 +41,6 @@ public class CalculatorServlet extends HttpServlet {
             message = (String) messageAttribute;
         }
 
-
-
-
-
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         try (PrintWriter out = resp.getWriter()) {
@@ -57,7 +55,7 @@ public class CalculatorServlet extends HttpServlet {
             out.println("<input type='submit' name= 'operation' value= 'Subtract' />");
             out.println("<input type='submit' name= 'operation' value= 'Multiply' />");
             out.println("<input type='submit' name= 'operation' value= 'Divide' />");
-            out.println("<p>"+ lstAnswers +"</p></b>");
+            out.println("<br><p>"+ lstAnswers +"</p>");
 
             out.println("</form></body></html>");
         }
@@ -91,7 +89,7 @@ public class CalculatorServlet extends HttpServlet {
                          lastNum1 = Integer.parseInt(numberPärameter);
                          lastNum2 = result;
                         result += Integer.parseInt(numberPärameter);
-                        previousResult = String.valueOf(lastNum2)+ " +   " +   String.valueOf(lastNum1) + "= " + result + "\n";
+                        previousResult = String.valueOf(lastNum2)+ " +   " +   String.valueOf(lastNum1) + " = " + result + "\n";
                         lstAnswers.add(previousResult);
                         break;
                     case "Subtract":
